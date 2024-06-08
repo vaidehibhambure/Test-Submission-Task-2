@@ -12,11 +12,16 @@ async function getProductById(id) {
 }
 
 async function createProduct(product) {
-    const connection = await database.connectDB();
-    const { name, description, price, quantity, category } = product;
-    const result = await connection.execute('INSERT INTO Products (name, description, price, quantity, category) VALUES (?, ?, ?, ?, ?)', //
-        [name, description, price, quantity, category]);
-    return { id: result[0].insertId };
+    try {
+        const connection = await database.connectDB();
+        const { name, description, price, quantity, category } = product;
+        const result = await connection.execute('INSERT INTO Products (name, description, price, quantity, category) VALUES (?, ?, ?, ?, ?)', //
+            [name, description, price, quantity, category]);
+        return { id: result[0].insertId };
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 }
 
 async function updateProduct(product, id) {

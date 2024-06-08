@@ -14,16 +14,24 @@ app.get('/api/getproduct/:id', async (req, res) => {
     res.json({ message: 'Product info recieved successfully', product: product });
 });
 
-app.get('/api/productbyname', async (req, res) => {
-    const { name } = req.body;
-    const product = await logic.getProductsByName(name)
-    res.json({ message: 'Product info recieved successfully.', product: product });
+app.get('/api/productbyname/:name', async (req, res) => {
+    try {
+        const { name } = req.params;
+        const product = await logic.getProductsByName(name)
+        res.json({ message: 'Product info recieved successfully.', product: product });
+    } catch (error) {
+        console.error(error);
+    }
 });
 
 app.post('/api/createproduct', async (req, res) => {
-    const product = req.body[0];
-    const productid = await logic.createProduct(product)
-    res.json({ message: 'Product created successfully.', info: productid });
+    try {
+        const product = req.body[0];
+        const productid = await logic.createProduct(product)
+        res.json({ message: 'Product created successfully.', info: productid });
+    } catch (error) {
+        console.error(error)
+    }
 });
 
 app.post('/api/updateproduct/:id', async (req, res) => {

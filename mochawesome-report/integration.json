@@ -1,0 +1,197 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-06-08T14:17:25.921Z",
+    "end": "2024-06-08T14:17:26.158Z",
+    "duration": 237,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d2b4858e-4640-44bb-895c-68d48eaf341a",
+      "title": "",
+      "fullFile": "C:\\Users\\palla\\Desktop\\Test-Submission-Task-2\\__tests__\\integration\\integration.test.js",
+      "file": "\\__tests__\\integration\\integration.test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ada31db3-9bda-4455-b370-5c9f845a92f1",
+          "title": "Integration Tests",
+          "fullFile": "C:\\Users\\palla\\Desktop\\Test-Submission-Task-2\\__tests__\\integration\\integration.test.js",
+          "file": "\\__tests__\\integration\\integration.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should retrieve all products",
+              "fullTitle": "Integration Tests should retrieve all products",
+              "timedOut": false,
+              "duration": 85,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const res = await request(server).get('/api/products');\nexpect(res.status).to.equal(200);\nexpect(res.body).to.be.an('array');",
+              "err": {},
+              "uuid": "add7db09-84ad-4dfa-a52a-f1ad49ab84c9",
+              "parentUUID": "ada31db3-9bda-4455-b370-5c9f845a92f1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should create a new product",
+              "fullTitle": "Integration Tests should create a new product",
+              "timedOut": false,
+              "duration": 45,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const newProduct = [{ \"name\": \"Postman Test\", \"description\": \"PM Description\", \"price\": 100, \"quantity\": \"20\", \"category\": \"Postman\" }];\nconst res = await request(server).post('/api/createproduct').send(newProduct);\nexpect(res.status).to.equal(200);\nexpect(res.body.info.id).to.be.a('number');\ncreatedProductId = res.body.info.id;\nconsole.log(createdProductId);",
+              "err": {},
+              "uuid": "d3a3d220-1e0e-4d57-a17c-bd10bc54b765",
+              "parentUUID": "ada31db3-9bda-4455-b370-5c9f845a92f1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should retrieve a product by ID",
+              "fullTitle": "Integration Tests should retrieve a product by ID",
+              "timedOut": false,
+              "duration": 16,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "console.log(createdProductId); // Add this line\nconst res = await request(server).get('/api/getproduct/' + createdProductId);\nconsole.log('Retrieve product response:', res.body);\nexpect(res.status).to.equal(200);\nexpect(res.body.product.id).to.equal(createdProductId);",
+              "err": {},
+              "uuid": "86a7864d-28b8-44ee-b4cc-51ee741f7ec1",
+              "parentUUID": "ada31db3-9bda-4455-b370-5c9f845a92f1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should retrieve a product by Name",
+              "fullTitle": "Integration Tests should retrieve a product by Name",
+              "timedOut": false,
+              "duration": 39,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const productName = \"Postman\"\nconst res = await request(server).get('/api/productbyname/' + productName);\nconsole.log('Retrieve product response:', res.body);\nexpect(res.status).to.equal(200);",
+              "err": {},
+              "uuid": "ee5a12e4-7af9-456a-af17-dd873987d95f",
+              "parentUUID": "ada31db3-9bda-4455-b370-5c9f845a92f1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should update a product",
+              "fullTitle": "Integration Tests should update a product",
+              "timedOut": false,
+              "duration": 15,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const productId = createdProductId;\nconst product = [{ \"name\": \"Postman Updated\", \"description\": \"PM Updated\", \"price\": 100, \"quantity\": \"20\", \"category\": \"Postman\" }];\nconst res = await request(server).post('/api/updateproduct/' + createdProductId).send(product);\nconsole.log('Update product response:', res.body);\nexpect(res.status).to.equal(200);",
+              "err": {},
+              "uuid": "f44cb629-4acc-4352-9f6d-feb96497603e",
+              "parentUUID": "ada31db3-9bda-4455-b370-5c9f845a92f1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should delete a product by ID",
+              "fullTitle": "Integration Tests should delete a product by ID",
+              "timedOut": false,
+              "duration": 21,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const res = await request(server).delete('/api/deleteproduct/' + createdProductId);\nexpect(res.status).to.equal(200);\n// Verify the deletion\nconst getRes = await request(server).get(`/api/products/${createdProductId}`);\nexpect(getRes.status).to.equal(404); // assuming you return a 404 for not found",
+              "err": {},
+              "uuid": "58af2513-66fb-4bc1-b705-971ed768c9ad",
+              "parentUUID": "ada31db3-9bda-4455-b370-5c9f845a92f1",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "add7db09-84ad-4dfa-a52a-f1ad49ab84c9",
+            "d3a3d220-1e0e-4d57-a17c-bd10bc54b765",
+            "86a7864d-28b8-44ee-b4cc-51ee741f7ec1",
+            "ee5a12e4-7af9-456a-af17-dd873987d95f",
+            "f44cb629-4acc-4352-9f6d-feb96497603e",
+            "58af2513-66fb-4bc1-b705-971ed768c9ad"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 221,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.4.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "integration",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportFilename": "integration"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

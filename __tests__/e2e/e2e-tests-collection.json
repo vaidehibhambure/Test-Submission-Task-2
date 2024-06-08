@@ -152,11 +152,23 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:3000/api/productbyname?name=pallavi",
+					"raw": "http://localhost:3000/api/productbyname/postman",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -164,13 +176,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"productbyname"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "pallavi"
-						}
+						"productbyname",
+						"postman"
 					]
 				}
 			},

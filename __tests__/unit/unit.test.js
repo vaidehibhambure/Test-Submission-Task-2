@@ -1,9 +1,16 @@
 const chai = require('chai');
 const expect = chai.expect;
 const logic = require('../../logic');
-var testId = 0;
+let testId = 0;
 
 describe('Logic Unit Tests', () => {
+
+    it('should retrieve all products', async () => {
+        const products = await logic.getAllProducts();
+        expect(products).to.be.an('array');
+        expect(products).to.have.length.above(0);
+    });
+
     it('should create a new products', async () => {
         const newProduct = { name: 'Bottle', description: 'water bottle', price: 100, quantity: 10, category: 'Accessory' };
         const result = await logic.createProduct(newProduct);
