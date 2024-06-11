@@ -6,7 +6,7 @@ This is a Node.js application that uses Express to create a simple REST API for 
 
     Node.js and npm install on your system
 
-  1. Clone the repository: 
+  1. Clone the repository: https://github.com/vaidehibhambure/Test-Submission-Task-2
     
 
   2. Navigate to the project directory: 
