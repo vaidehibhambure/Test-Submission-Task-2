@@ -7,10 +7,8 @@
     "type": "module",
     "test:unit": "mocha --reporter mochawesome -reporter-options reportFilename=unit __tests__/unit/unit.test.js",
     "test:integration": "mocha --reporter mochawesome -reporter-options reportFilename=integration __tests__/integration/integration.test.js",
-    "test:e2e": "npx newman run __tests__/e2e/e2e-tests-collection.json -r cli,htmlextra --reporter-htmlextra-title \"e2e test report\" --reporter-htmlextra-export mochawesome-report/e2e.html -e __tests__/e2e/e2e_environment.json --delay-request 1000",
+    "test:e2e": "npx newman run __tests__/e2e/postman_collection.json -r cli,htmlextra --reporter-htmlextra-title\"e2e test report\",",
     "test:all": "npm run test:unit && npm run test:integration && npm run test:e2e",
-    "merge-reports": "npx mochawesome-merge './mochawesome-report/*.json ' -o mochawesome-report/combined.json",
-    "generate-html": "npx mochawesome-report-generator mochawesome-report/combined.json -o ./",
     "start": "node server.js"
   },
   "keywords": [],

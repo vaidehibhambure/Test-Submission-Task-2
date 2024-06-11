@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "599196ee-17a4-417b-b4da-2291d79017bf",
+		"_postman_id": "c0a87ad5-704c-4c60-b0ae-10ff8766bcdb",
 		"name": "End to end testing",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34088422"
+		"_exporter_id": "34088432"
 	},
 	"item": [
 		{
@@ -15,11 +15,10 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Successful POST request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"    pm.response.to.have.status(201);",
 							"});",
 							"",
-							"var jsondata = pm.response.json();",
-							"pm.environment.set(\"testProductID\", jsondata.info.id);"
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -31,7 +30,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[{\"name\":\"Postman Test\",\"description\":\"PM Description\",\"price\":100,\"quantity\":\"20\",\"category\":\"Postman\"}]",
+					"raw": "{\"name\":\"Postman Test\",\"description\":\"PM Description\",\"price\":100,\"quantity\":\"20\",\"category\":\"Postman\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -39,7 +38,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/createproduct",
+					"raw": "http://localhost:3000/api/products",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -47,7 +46,7 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"createproduct"
+						"products"
 					]
 				},
 				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
@@ -97,7 +96,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Successful POST request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"    pm.response.to.have.status(204);",
 							"});",
 							""
 						],
@@ -107,11 +106,11 @@
 				}
 			],
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[{\"name\":\"Postman Updated\",\"description\":\"PM Description\",\"price\":100,\"quantity\":\"20\",\"category\":\"Postman\"}]",
+					"raw": "{\"name\":\"Postman Updated\",\"description\":\"PM Description\",\"price\":120,\"quantity\":\"20\",\"category\":\"Postman\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -119,7 +118,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/updateproduct/{{testProductID}}",
+					"raw": "http://localhost:3000/api/products/44",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -127,8 +126,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"updateproduct",
-						"{{testProductID}}"
+						"products",
+						"44"
 					]
 				},
 				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
@@ -142,33 +141,25 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful POST request\", function () {\r",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"pm.test(\"Successful GET request\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							""
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].name).to.eql(\"Bottle\");\r",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:3000/api/productbyname/postman",
+					"raw": "http://localhost:3000/api/products?name=Bottle",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -176,8 +167,13 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"productbyname",
-						"postman"
+						"products"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Bottle"
+						}
 					]
 				}
 			},
@@ -190,10 +186,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful POST request\", function () {\r",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"pm.test(\"Successful GET request\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							""
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Test Chair\");\r",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -204,7 +204,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/getproduct/{{testProductID}}",
+					"raw": "http://localhost:3000/api/products/122",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -212,8 +212,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"getproduct",
-						"{{testProductID}}"
+						"products",
+						"122"
 					]
 				}
 			},
@@ -227,7 +227,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Successful DELETE request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"    pm.response.to.have.status(204);",
 							"});",
 							""
 						],
@@ -241,7 +241,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\"id\": 113,\"name\": \"Test Chair\", \"description\": \"A comfortable test chair\", \"price\": 150, \"quantity\": 2, \"category\": \"Test Furniture\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -249,7 +249,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/deleteproduct/{{testProductID}}",
+					"raw": "http://localhost:3000/api/products/113",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -257,8 +257,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"deleteproduct",
-						"{{testProductID}}"
+						"products",
+						"113"
 					]
 				},
 				"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."

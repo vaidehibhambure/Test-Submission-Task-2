@@ -4,8 +4,8 @@ async function connectDB() {
         connection = await mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: 'Kushal@249',
-            database: 'users'
+            password: 'root',
+            database: 'productdb'
         });
         console.log("Connected to the database.");
         return connection;

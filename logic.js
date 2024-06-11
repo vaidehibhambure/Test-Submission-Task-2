@@ -26,7 +26,8 @@ async function createProduct(product) {
 
 async function updateProduct(product, id) {
     const connection = await database.connectDB();
-    const { name, description, price, quantity, category } = product; await connection.execute('UPDATE Products SET name = ?, description = ?, price = ?, quantity = ?, category = ? WHERE id = ?',
+    const { name, description, price, quantity, category } = product;
+    await connection.execute('UPDATE Products SET name = ?, description = ?, price = ?, quantity = ?, category = ? WHERE id = ?',
         [name, description, price, quantity, category, id]);
 }
 

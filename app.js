@@ -3,48 +3,36 @@ const logic = require('./logic.js');
 const app = express();
 app.use(express.json());
 
+
 app.get('/api/products', async (req, res) => {
-    const products = await logic.getAllProducts();
+    let products;
+    if (req.query.name) {
+        products = await logic.getProductsByName(req.query.name);
+    } else {
+        products = await logic.getAllProducts();
+    }
     res.json(products);
 });
 
-app.get('/api/getproduct/:id', async (req, res) => {
-    const id = req.params.id
-    const product = await logic.getProductById(id)
-    res.json({ message: 'Product info recieved successfully', product: product });
+app.get('/api/products/:id', async (req, res) => {
+    const product = await logic.getProductById(req.params.id);
+    if (!product) return res.status(404).send('Product not found');
+    res.json(product);
 });
 
-app.get('/api/productbyname/:name', async (req, res) => {
-    try {
-        const { name } = req.params;
-        const product = await logic.getProductsByName(name)
-        res.json({ message: 'Product info recieved successfully.', product: product });
-    } catch (error) {
-        console.error(error);
-    }
+app.post('/api/products', async (req, res) => {
+    const product = await logic.createProduct(req.body);
+    res.status(201).json(product);
 });
 
-app.post('/api/createproduct', async (req, res) => {
-    try {
-        const product = req.body[0];
-        const productid = await logic.createProduct(product)
-        res.json({ message: 'Product created successfully.', info: productid });
-    } catch (error) {
-        console.error(error)
-    }
+app.put('/api/products/:id', async (req, res) => {
+    await logic.updateProduct(req.body, req.params.id);
+    res.sendStatus(204);
 });
 
-app.post('/api/updateproduct/:id', async (req, res) => {
-    const id = req.params.id;
-    const product = req.body[0];
-    const productid = await logic.updateProduct(product, id)
-    res.json({ message: 'Product updated successfully.', info: productid });
-});
-
-app.delete('/api/deleteproduct/:id', async (req, res) => {
-    const id = req.params.id;
-    const prodid = await logic.deleteProduct(id)
-    res.json({ message: 'Product deleted successfully.', prodid });
+app.delete('/api/products/:id', async (req, res) => {
+    await logic.deleteProduct(req.params.id);
+    res.sendStatus(204);
 });
 
 module.exports = app;
